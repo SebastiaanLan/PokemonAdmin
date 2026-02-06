@@ -220,7 +220,18 @@ $trainers['red']->addPokemon(createPokemon("pikachu"));
 $trainers['gary']->addPokemon(createPokemon("squirtle"));
 $trainers['gary']->addPokemon(createPokemon("bulbasaur"));
 
+// Gary's Squirtle attacks Red's charmander with tackle for 35 dmg
 $trainers['gary']->pokemons[0]->attack($trainers['red']->pokemons[0], $trainers['gary']->pokemons[0]->moves[0]);
+
+// Gary's Squirtle levels up
+$trainers['gary']->pokemons[0]->levelUp();
+
+// Red's charmander heals for 20 hp
+$trainers['red']->pokemons[0]->heal(20);
+
+// Red earns a badge
+$trainers['red']->earnBadge();
+
 
 include "template.php";
 ?>
