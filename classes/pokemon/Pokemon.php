@@ -1,29 +1,23 @@
 <?php
 
-class Pokemon {
-    private $naam;
-    private $type;
-    private $level;
-    private $hp;
-    private $ability;
+abstract class Pokemon {
+    protected $naam;
+    protected $level;
+    protected $hp;
+    protected $maxHP;
     public $moves;
 
-    public function __construct($naam, $type, $level, $hp, $ability) {
+    public function __construct($naam, $level, $hp) {
         $this->naam = $naam;
-        $this->type = $type;
         $this->level = $level;
         $this->hp = $hp;
-        $this->ability = $ability;
+        $this->maxHP = $hp;
         $this->moves = [];
     }
 
     // Getters
     public function getNaam() {
         return $this->naam;
-    }
-
-    public function getType() {
-        return $this->type;
     }
 
     public function getLevel() {
@@ -34,8 +28,8 @@ class Pokemon {
         return $this->hp;
     }
 
-    public function getAbility() {
-        return $this->ability;
+    public function getMaxHP() {
+        return $this->hp;
     }
 
     // Setters
@@ -48,10 +42,10 @@ class Pokemon {
     }
 
     public function setHP($hp) {
-        if ($hp >= 0) {
+        if ($hp >= 0 && $hp <= $this->maxHP) {
             $this->hp = $hp;
         }
-        return "<strong>ERROR:</strong> HP mag niet lager dan 0 zijn (gegeven: " . $hp . ")";
+        return "<strong>ERROR:</strong> HP moet tussen de 0 en " . $this->maxHP . " zijn (gegeven: " . $hp . ")";
     }
 
     // Methods

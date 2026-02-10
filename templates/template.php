@@ -17,7 +17,6 @@
             <h2><?= $trainer->getNaam() ?></h2>
 
             <ul>
-                <li>Specialiteit: <?= $trainer->getSpecialiteit() ?></li>
                 <li>Badges: <?= $trainer->getBadges() ?></li>
             </ul>
         </div>
@@ -30,7 +29,6 @@
                         <li>Type: <?= $pokemon->getType() ?></li>
                         <li>Level: <?= $pokemon->getLevel() ?></li>
                         <li>HP: <?= $pokemon->getHP() ?></li>
-                        <li>Ability: <?= $pokemon->getAbility() ?></li>
                     </ul>
 
                     <div class="moves">

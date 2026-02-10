@@ -2,13 +2,11 @@
 
 class Trainer {
     private $naam;
-    private $specialiteit;
     private $badges;
     public $pokemons;
 
-    public function __construct($naam, $specialiteit, $badges) {
+    public function __construct($naam, $badges) {
         $this->naam = $naam;
-        $this->specialiteit = $specialiteit;
         $this->badges = $badges;
     }
 
@@ -16,11 +14,7 @@ class Trainer {
     public function getNaam() {
         return $this->naam;
     }
-
-    public function getSpecialiteit() {
-        return $this->specialiteit;
-    }
-
+    
     public function getBadges() {
         return $this->badges;
     }
