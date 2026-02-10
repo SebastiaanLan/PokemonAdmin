@@ -2,13 +2,15 @@
 <html>
 <head>
     <title>Pokemon Admin Systeem</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
 
 <h1>Pokemon Admin Systeem</h1>
 
 <div class="container">
+    <?php include 'partials/outputbox.php'; ?>
+
     <?php foreach ($trainers as $trainer): ?>
     <div class="trainer">
         <div class="trainerInfo">
