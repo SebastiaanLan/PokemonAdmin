@@ -1,11 +1,14 @@
 <?php
 
-abstract class Pokemon {
+require_once "Interfaces.php";
+
+abstract class Pokemon implements Tradeable, Evolvable{
     protected $naam;
     protected $level;
     protected $hp;
     protected $maxHP;
-    public $moves;
+    protected $moves;
+    protected ?Trainer $trainer = null;
 
     public function __construct($naam, $level, $hp) {
         $this->naam = $naam;
@@ -32,6 +35,14 @@ abstract class Pokemon {
         return $this->hp;
     }
 
+    public function getTrainer() {
+        return $this->trainer;
+    }
+
+    public function getMoves() {
+        return $this->moves;
+    }
+
     // Setters
     public function setLevel($level) {
         if ($level >= 1 && $level <= 100) {
@@ -48,6 +59,10 @@ abstract class Pokemon {
         return "<strong>ERROR:</strong> HP moet tussen de 0 en " . $this->maxHP . " zijn (gegeven: " . $hp . ")";
     }
 
+    public function setTrainer(?Trainer $trainer) {
+        $this->trainer = $trainer;
+    }
+
     // Methods
     public function addMove(Move $move) {
         $this->moves[] = $move;
@@ -59,13 +74,13 @@ abstract class Pokemon {
         $target->damage($damageTaken);
         $move->use();
 
-        return $this->naam . " valt " . $target->getNaam() . " aan met " . $move->getNaam() . " voor " . $damageTaken . " schade";
+        return $this->trainer->getNaam() . "'s " . $this->naam . " valt " . $target->trainer->getNaam() . "'s " . $target->getNaam() . " aan met " . $move->getNaam() . " voor " . $damageTaken . " schade";
     }
 
     public function heal($amount) {
         $this->setHP($this->getHP() + $amount);
 
-        return $this->naam . " geneest " . $amount . " schade en heeft nu " . $this->hp . " hp";
+        return $this->trainer->getNaam() . "'s " .  $this->naam . " geneest " . $amount . " schade en heeft nu " . $this->hp . " hp";
     }
 
     public function damage($amount) {
@@ -75,6 +90,23 @@ abstract class Pokemon {
     public function levelUp() {
         $this->setLevel($this->getLevel() + 1);
 
-        return $this->naam . " gaat een level omhoog en is nu level " . $this->level;
+        return $this->trainer->getNaam() . "'s " . $this->naam . " gaat een level omhoog en is nu level " . $this->level;
+    }
+
+    // Interface Methods
+    public function trade(Trainer $newTrainer) {
+        $oldTrainer = $this->trainer;
+        $oldTrainer->removePokemon($this);
+        $newTrainer->addPokemon($this);
+
+        return $oldTrainer->getNaam() . " heeft zijn " . $this->naam . " geruild met " . $newTrainer->getNaam();
+    }
+
+    public function evolve() {
+
+    }
+
+    public function canEvolve() {
+        
     }
 }

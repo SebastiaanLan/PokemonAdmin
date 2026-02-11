@@ -22,7 +22,7 @@
         </div>
 
         <div class="team">
-            <?php foreach ($trainer->pokemons as $pokemon): ?>
+            <?php foreach ($trainer->getPokemons() as $pokemon): ?>
                 <div class="pokemon">
                     <h3><?= $pokemon->getNaam() ?></h3>
                     <ul>
@@ -32,7 +32,7 @@
                     </ul>
 
                     <div class="moves">
-                        <?php foreach ($pokemon->moves as $move): ?>
+                        <?php foreach ($pokemon->getMoves() as $move): ?>
                             <div class="move">
                                 <ul>
                                     <li><strong><?= $move->getNaam() ?></strong></li>

@@ -1,11 +1,16 @@
 <div class="outputBox">
     <ul>
-        <li><?= $trainers['gary']->pokemons[0]->attack($trainers['red']->pokemons[0], $trainers['gary']->pokemons[0]->moves[0]) ?></li>
-        <li><?= $trainers['gary']->pokemons[0]->levelUp() ?></li>
-        <li><?= $trainers['red']->pokemons[0]->heal(20) ?></li>
+        <li><?= $trainers['gary']->getPokemons()[0]->attack($trainers['red']->getPokemons()[0], $trainers['gary']->getPokemons()[0]->getMoves()[0]) ?></li>
+        <li><?= $trainers['gary']->getPokemons()[0]->levelUp() ?></li>
+        <li><?= $trainers['red']->getPokemons()[0]->heal(20) ?></li>
         <li><?= $trainers['gary']->earnBadge() ?></li>
-        <li><?= $trainers['gary']->pokemons[1]->setHP(-100) ?></li>
-        <li><?= $trainers['red']->pokemons[1]->setLevel(200) ?></li>
+        <li><?= $trainers['gary']->getPokemons()[1]->setHP(-100) ?></li>
+        <li><?= $trainers['red']->getPokemons()[1]->setLevel(200) ?></li>
         <li><?= $trainers['red']->setBadges(20) ?></li>
+        <li><?= $trainers['red']->getPokemons()[1]->trade($trainers['gary']) ?></li>
+        
+        <?php for ($i = 0; $i<2000; $i++): ?>
+            <li>P O K E M O N</li>
+        <?php endfor; ?>
     </ul>
 </div>

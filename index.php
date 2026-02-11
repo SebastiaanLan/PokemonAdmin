@@ -25,9 +25,11 @@ function createMove($newMove) {
 
 $pokemonTemplates = [
     "charmander" => ["Charmander", 5, 100, ["tackle", "ember"]],
+    "psyduck" => ["Psyduck", 5, 100, ["tackle", "bubble"]],
+    "pidgey" => ["Pidgey", 5, 100, ["tackle", "gust"]],
     "squirtle" => ["Squirtle", 5, 100, ["tackle", "bubble"]],
     "bulbasaur" => ["Bulbasaur", 5, 100, ["tackle", "vine_whip"]],
-    "rookidee" => ["Rookidee", 5, 100, ["tackle", "gust"]],
+    "growlithe" => ["Growlithe", 5, 100, ["tackle", "ember"]],
 ];
 
 function createPokemon($name) {
@@ -50,10 +52,12 @@ $trainers = [
 ];
 
 $trainers['red']->addPokemon(createPokemon("charmander"));
-$trainers['red']->addPokemon(createPokemon("rookidee"));
+$trainers['red']->addPokemon(createPokemon("pidgey"));
+$trainers['red']->addPokemon(createPokemon("psyduck"));
 
 $trainers['gary']->addPokemon(createPokemon("squirtle"));
 $trainers['gary']->addPokemon(createPokemon("bulbasaur"));
+$trainers['gary']->addPokemon(createPokemon("growlithe"));
 
 include "templates/template.php";
 ?>

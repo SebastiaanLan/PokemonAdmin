@@ -3,7 +3,7 @@
 class Trainer {
     private $naam;
     private $badges;
-    public $pokemons;
+    private $pokemons;
 
     public function __construct($naam, $badges) {
         $this->naam = $naam;
@@ -19,6 +19,10 @@ class Trainer {
         return $this->badges;
     }
 
+    public function getPokemons() {
+        return $this->pokemons;
+    }
+
     // Setters
     public function setBadges($badges) {
         if ($badges >= 0 && $badges <= 8) {
@@ -31,6 +35,19 @@ class Trainer {
     // Methods
     public function addPokemon(Pokemon $pokemon) {
         $this->pokemons[] = $pokemon;
+        $pokemon->setTrainer($this);
+    }
+
+    public function removePokemon(Pokemon $pokemon) {
+        $index = array_search($pokemon, $this->pokemons, true);
+
+        if ($index !== false) {
+            array_splice($this->pokemons, $index, 1);
+            $pokemon->setTrainer(null);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function earnBadge() {
