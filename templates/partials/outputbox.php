@@ -8,9 +8,5 @@
         <li><?= $trainers['red']->getPokemons()[1]->setLevel(200) ?></li>
         <li><?= $trainers['red']->setBadges(20) ?></li>
         <li><?= $trainers['red']->getPokemons()[1]->trade($trainers['gary']) ?></li>
-        
-        <?php for ($i = 0; $i<2000; $i++): ?>
-            <li>P O K E M O N</li>
-        <?php endfor; ?>
     </ul>
 </div>
