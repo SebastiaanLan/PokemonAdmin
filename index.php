@@ -11,9 +11,11 @@ require_once "classes/pokemon/FlyingPokemon.php";
 $moveTemplates = [
     "tackle" => ["Tackle", "Normal", 35, 40],
     "ember" => ["Ember", "Fire", 40, 25],
+    "flamethrower" => ["Flamethrower", "Fire", 90, 15],
     "bubble" => ["Bubble", "Water", 40, 30],
     "vine_whip" => ["Vine Whip", "Grass", 45, 25],
     "gust" => ["Gust", "Flying", 40, 35],
+    "dragon_breath" => ["Dragon Breath", "Dragon", 60, 20],
 ];
 
 function createMove($newMove) {
@@ -24,7 +26,9 @@ function createMove($newMove) {
 }
 
 $pokemonTemplates = [
-    "charmander" => ["Charmander", 5, 100, ["tackle", "ember"]],
+    "charmander" => ["Charmander", 5, 100, ["tackle", "ember"], "charmeleon"],
+    "charmeleon" => ["Charmeleon", 16, 200, ["tackle", "ember", "dragon_breath"], "charizard"],
+    "charizard" => ["Charizard", 36, 300, ["tackle", "ember", "dragon_breath", "flamethrower"]],
     "psyduck" => ["Psyduck", 5, 100, ["tackle", "bubble"]],
     "pidgey" => ["Pidgey", 5, 100, ["tackle", "gust"]],
     "squirtle" => ["Squirtle", 5, 100, ["tackle", "bubble"]],
@@ -35,9 +39,9 @@ $pokemonTemplates = [
 function createPokemon($name) {
     global $pokemonTemplates;
 
-    [$naam, $level, $hp, $moveKeys] = $pokemonTemplates[$name];
+    [$naam, $level, $hp, $moveKeys, $evolution] = array_pad($pokemonTemplates[$name], 5, null);
 
-    $pokemon = new FirePokemon($naam, $level, $hp);
+    $pokemon = new FirePokemon($naam, $level, $hp, createPokemon($evolution));
 
     foreach ($moveKeys as $moveKey) {
         $pokemon->addMove(createMove($moveKey));

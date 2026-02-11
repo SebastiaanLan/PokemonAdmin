@@ -8,14 +8,17 @@ abstract class Pokemon implements Tradeable, Evolvable{
     protected $hp;
     protected $maxHP;
     protected $moves;
-    protected ?Trainer $trainer = null;
+    protected ?Trainer $trainer;
+    protected $evolution;
 
-    public function __construct($naam, $level, $hp) {
+    public function __construct($naam, $level, $hp, $evolution) {
         $this->naam = $naam;
         $this->level = $level;
         $this->hp = $hp;
         $this->maxHP = $hp;
         $this->moves = [];
+        $this->trainer = null;
+        $this->evolution = $evolution;
     }
 
     // Getters
@@ -63,6 +66,10 @@ abstract class Pokemon implements Tradeable, Evolvable{
         $this->trainer = $trainer;
     }
 
+    public function setNaam($naam) {
+        $this->naam = $naam;
+    }
+
     // Methods
     public function addMove(Move $move) {
         $this->moves[] = $move;
@@ -104,9 +111,24 @@ abstract class Pokemon implements Tradeable, Evolvable{
 
     public function evolve() {
 
+        if ($this->canEvolve()) {
+            return createPokemon($this->evolution);
+        } else {
+            return $this->canEvolve();
+        }
     }
 
     public function canEvolve() {
-        
+        $stringName = $this->trainer->getNaam() . "'s " . $this->naam;
+
+        if ($this->evolution === null) {
+            return "ERROR: " . $stringName . " heeft geen evolutie meer";
+        }
+
+        if ($this->level >= $this->evolution->getLevel()) {
+            return "ERROR: " . $stringName . " is nog geen level " . $this->evolution->getLevel() . "(Huidige level: " . $this->level . ")";
+        }
+
+        return true;
     }
 }
