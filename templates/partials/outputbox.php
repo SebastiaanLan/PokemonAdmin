@@ -8,5 +8,8 @@
         <li><?= $trainers['red']->getPokemons()[1]->setLevel(200) ?></li>
         <li><?= $trainers['red']->setBadges(20) ?></li>
         <li><?= $trainers['red']->getPokemons()[1]->trade($trainers['gary']) ?></li>
+        <li><?= $trainers['gary']->getPokemons()[1]->trade($trainers['red']) ?></li>
+        <li><?= $trainers['gary']->getPokemons()[2]->fly() ?></li>
+        <li><?= $trainers['red']->getPokemons()[1]->swim() ?></li>
     </ul>
 </div>

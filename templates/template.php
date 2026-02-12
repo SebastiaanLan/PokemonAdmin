@@ -12,41 +12,41 @@
     <?php include 'partials/outputbox.php'; ?>
 
     <?php foreach ($trainers as $trainer): ?>
-    <div class="trainer">
-        <div class="trainerInfo">
-            <h2><?= $trainer->getNaam() ?></h2>
+        <div class="trainer">
+            <div class="trainerInfo">
+                <h2><?= $trainer->getNaam() ?></h2>
 
-            <ul>
-                <li>Badges: <?= $trainer->getBadges() ?></li>
-            </ul>
-        </div>
+                <ul>
+                    <li>Badges: <?= $trainer->getBadges() ?></li>
+                </ul>
+            </div>
 
-        <div class="team">
-            <?php foreach ($trainer->getPokemons() as $pokemon): ?>
-                <div class="pokemon">
-                    <h3><?= $pokemon->getNaam() ?></h3>
-                    <ul>
-                        <li>Type: <?= $pokemon->getType() ?></li>
-                        <li>Level: <?= $pokemon->getLevel() ?></li>
-                        <li>HP: <?= $pokemon->getHP() ?></li>
-                    </ul>
+            <div class="team">
+                <?php foreach ($trainer->getPokemons() as $pokemon): ?>
+                    <div class="pokemon">
+                        <h3><?= $pokemon->getNaam() ?></h3>
+                        <ul>
+                            <li>Type: <?= $pokemon->getType() ?></li>
+                            <li>Level: <?= $pokemon->getLevel() ?></li>
+                            <li>HP: <?= $pokemon->getHP() ?></li>
+                        </ul>
 
-                    <div class="moves">
-                        <?php foreach ($pokemon->getMoves() as $move): ?>
-                            <div class="move">
-                                <ul>
-                                    <li><strong><?= $move->getNaam() ?></strong></li>
-                                    <li>Type: <?= $move->getType() ?></li>
-                                    <li>Power: <?= $move->getPower() ?></li>
-                                    <li>PP: <?= $move->getPP() ?></li>
-                                </ul>
-                            </div>
-                        <?php endforeach; ?>
+                        <div class="moves">
+                            <?php foreach ($pokemon->getMoves() as $move): ?>
+                                <div class="move">
+                                    <ul>
+                                        <li><strong><?= $move->getNaam() ?></strong></li>
+                                        <li>Type: <?= $move->getType() ?></li>
+                                        <li>Power: <?= $move->getPower() ?></li>
+                                        <li>PP: <?= $move->getPP() ?></li>
+                                    </ul>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
-    </div>
     <?php endforeach; ?>
 </div>
 

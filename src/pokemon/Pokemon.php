@@ -1,24 +1,26 @@
 <?php
 
-require_once "Interfaces.php";
+namespace classes\pokemon;
 
-abstract class Pokemon implements Tradeable, Evolvable{
+use classes\interfaces\Tradeable;
+use classes\Trainer;
+use classes\Move;
+
+abstract class Pokemon implements Tradeable {
     protected $naam;
     protected $level;
     protected $hp;
     protected $maxHP;
     protected $moves;
     protected ?Trainer $trainer;
-    protected $evolution;
 
-    public function __construct($naam, $level, $hp, $evolution) {
+    public function __construct($naam, $level, $hp) {
         $this->naam = $naam;
         $this->level = $level;
         $this->hp = $hp;
         $this->maxHP = $hp;
         $this->moves = [];
         $this->trainer = null;
-        $this->evolution = $evolution;
     }
 
     // Getters
@@ -107,28 +109,5 @@ abstract class Pokemon implements Tradeable, Evolvable{
         $newTrainer->addPokemon($this);
 
         return $oldTrainer->getNaam() . " heeft zijn " . $this->naam . " geruild met " . $newTrainer->getNaam();
-    }
-
-    public function evolve() {
-
-        if ($this->canEvolve()) {
-            return createPokemon($this->evolution);
-        } else {
-            return $this->canEvolve();
-        }
-    }
-
-    public function canEvolve() {
-        $stringName = $this->trainer->getNaam() . "'s " . $this->naam;
-
-        if ($this->evolution === null) {
-            return "ERROR: " . $stringName . " heeft geen evolutie meer";
-        }
-
-        if ($this->level >= $this->evolution->getLevel()) {
-            return "ERROR: " . $stringName . " is nog geen level " . $this->evolution->getLevel() . "(Huidige level: " . $this->level . ")";
-        }
-
-        return true;
     }
 }

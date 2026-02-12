@@ -1,12 +1,14 @@
 <?php
 
-require_once "classes/Move.php";
-require_once "classes/Trainer.php"; 
+require_once __DIR__ . '/vendor/autoload.php';
 
-require_once "classes/pokemon/FirePokemon.php";
-require_once "classes/pokemon/WaterPokemon.php";
-require_once "classes/pokemon/GrassPokemon.php";
-require_once "classes/pokemon/FlyingPokemon.php";
+use classes\Move;
+use classes\Trainer;
+
+use classes\pokemon\FirePokemon;
+use classes\pokemon\FlyPokemon;
+use classes\pokemon\GrassPokemon;
+use classes\pokemon\WaterPokemon;
 
 $moveTemplates = [
     "tackle" => ["Tackle", "Normal", 35, 40],
@@ -26,22 +28,22 @@ function createMove($newMove) {
 }
 
 $pokemonTemplates = [
-    "charmander" => ["Charmander", 5, 100, ["tackle", "ember"], "charmeleon"],
-    "charmeleon" => ["Charmeleon", 16, 200, ["tackle", "ember", "dragon_breath"], "charizard"],
-    "charizard" => ["Charizard", 36, 300, ["tackle", "ember", "dragon_breath", "flamethrower"]],
-    "psyduck" => ["Psyduck", 5, 100, ["tackle", "bubble"]],
-    "pidgey" => ["Pidgey", 5, 100, ["tackle", "gust"]],
-    "squirtle" => ["Squirtle", 5, 100, ["tackle", "bubble"]],
-    "bulbasaur" => ["Bulbasaur", 5, 100, ["tackle", "vine_whip"]],
-    "growlithe" => ["Growlithe", 5, 100, ["tackle", "ember"]],
+    "charmander" => ["Charmander", FirePokemon::class, 5, 100, ["tackle", "ember"], "charmeleon"],
+    "charmeleon" => ["Charmeleon", FirePokemon::class, 16, 200, ["tackle", "ember", "dragon_breath"],],
+    "charizard" => ["Charizard", FirePokemon::class, 36, 300, ["tackle", "ember", "dragon_breath", "flamethrower"]],
+    "psyduck" => ["Psyduck", WaterPokemon::class, 15, 100, ["tackle", "bubble"]],
+    "pidgey" => ["Pidgey", FlyPokemon::class, 5, 100, ["tackle", "gust"]],
+    "squirtle" => ["Squirtle", WaterPokemon::class, 5, 100, ["tackle", "bubble"]],
+    "bulbasaur" => ["Bulbasaur", GrassPokemon::class, 5, 100, ["tackle", "vine_whip"]],
+    "growlithe" => ["Growlithe", FirePokemon::class, 5, 100, ["tackle", "ember"]],
 ];
 
 function createPokemon($name) {
     global $pokemonTemplates;
 
-    [$naam, $level, $hp, $moveKeys, $evolution] = array_pad($pokemonTemplates[$name], 5, null);
+    [$naam, $class, $level, $hp, $moveKeys] = $pokemonTemplates[$name];
 
-    $pokemon = new FirePokemon($naam, $level, $hp, createPokemon($evolution));
+    $pokemon = new $class($naam, $level, $hp);
 
     foreach ($moveKeys as $moveKey) {
         $pokemon->addMove(createMove($moveKey));

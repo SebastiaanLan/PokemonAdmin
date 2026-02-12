@@ -1,6 +1,8 @@
 <?php
 
-require_once "Pokemon.php";
+namespace classes\pokemon;
+
+use classes\pokemon\Pokemon;
 
 class FirePokemon extends Pokemon {
     private $type = "Fire";

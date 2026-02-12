@@ -1,5 +1,7 @@
 <?php
 
+namespace classes;
+
 class Move {
     private $naam;
     private $type;

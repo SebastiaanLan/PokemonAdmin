@@ -1,5 +1,9 @@
 <?php
 
+namespace classes;
+
+use classes\pokemon\Pokemon;
+
 class Trainer {
     private $naam;
     private $badges;
@@ -54,5 +58,13 @@ class Trainer {
         $this->setBadges($this->getBadges() + 1);
 
         return $this->naam . " heeft een badge verdient en heeft er nu " . $this->badges;
+    }
+
+    public function tradeAll($newTrainer) {
+        foreach($this->pokemons as $pokemon) {
+            $pokemon->trade($newTrainer);
+        }
+
+        return $this->naam . " heeft al zijn pokemons gegeven aan " . $newTrainer->getNaam();
     }
 }
