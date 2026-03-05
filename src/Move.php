@@ -1,6 +1,6 @@
 <?php
 
-namespace classes;
+namespace App;
 
 class Move {
     private $naam;

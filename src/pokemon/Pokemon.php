@@ -1,26 +1,29 @@
 <?php
 
-namespace classes\pokemon;
+namespace App\pokemon;
 
-use classes\interfaces\Tradeable;
-use classes\Trainer;
-use classes\Move;
+use App\interfaces\Tradable;
+use App\interfaces\Evolvable;
+use App\Trainer;
+use App\Move;
 
-abstract class Pokemon implements Tradeable {
+abstract class Pokemon implements Tradable, Evolvable {
     protected $naam;
     protected $level;
     protected $hp;
     protected $maxHP;
     protected $moves;
     protected ?Trainer $trainer;
+    protected ?string $evolutionName; 
 
-    public function __construct($naam, $level, $hp) {
+    public function __construct($naam, $level, $hp, ?string $evolutionName = null) {
         $this->naam = $naam;
         $this->level = $level;
         $this->hp = $hp;
         $this->maxHP = $hp;
         $this->moves = [];
         $this->trainer = null;
+        $this->evolutionName = $evolutionName;
     }
 
     // Getters
@@ -109,5 +112,33 @@ abstract class Pokemon implements Tradeable {
         $newTrainer->addPokemon($this);
 
         return $oldTrainer->getNaam() . " heeft zijn " . $this->naam . " geruild met " . $newTrainer->getNaam();
+    }
+
+    public function evolve() {
+        global $pokemonTemplates;
+
+        if ($this->evolutionName === null) {
+            return $this->naam . " kan niet evolueren!";
+        }
+
+        $template = $pokemonTemplates[$this->evolutionName];
+        [$naam, $class, $requiredLevel, $hp, $moveKeys] = $template;
+
+        if ($this->level < $requiredLevel) {
+            return $this->naam . " is nog niet sterk genoeg om te evolueren!";
+        }
+
+        $this->naam = $naam;
+        $this->hp = $hp;
+        $this->maxHP = $hp;
+        $this->moves = [];
+
+        foreach ($moveKeys as $moveKey) {
+            $this->addMove(createMove($moveKey));
+        }
+
+        $this->evolutionName = $template[5] ?? null;
+
+        return $this->trainer->getNaam() . "'s Pokemon evolueert naar " . $this->naam . "!";
     }
 }

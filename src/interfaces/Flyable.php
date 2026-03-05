@@ -1,6 +1,6 @@
 <?php
 
-namespace classes\interfaces;
+namespace App\interfaces;
 
 Interface Flyable {
     public function fly();

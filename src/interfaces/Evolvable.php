@@ -1,8 +1,7 @@
 <?php
 
-namespace classes\interfaces;
+namespace App\interfaces;
 
 Interface Evolvable {
     public function evolve();
-    public function canEvolve();
 }

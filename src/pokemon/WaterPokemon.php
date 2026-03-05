@@ -1,9 +1,9 @@
 <?php
 
-namespace classes\pokemon;
+namespace App\pokemon;
 
-use classes\pokemon\Pokemon;
-use classes\interfaces\Swimable;
+use App\pokemon\Pokemon;
+use App\interfaces\Swimable;
 
 class WaterPokemon extends Pokemon implements Swimable{
     private $type = "Water";

@@ -1,9 +1,9 @@
 <?php
 
-namespace classes\pokemon;
+namespace App\pokemon;
 
-use classes\pokemon\Pokemon;
-use classes\interfaces\Flyable;
+use App\pokemon\Pokemon;
+use App\interfaces\Flyable;
 
 class FlyPokemon extends Pokemon implements Flyable{
     private $type = "Flying";

@@ -1,8 +1,8 @@
 <?php
 
-namespace classes;
+namespace App;
 
-use classes\pokemon\Pokemon;
+use App\pokemon\Pokemon;
 
 class Trainer {
     private $naam;

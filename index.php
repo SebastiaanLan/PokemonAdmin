@@ -2,13 +2,13 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use classes\Move;
-use classes\Trainer;
+use App\Move;
+use App\Trainer;
 
-use classes\pokemon\FirePokemon;
-use classes\pokemon\FlyPokemon;
-use classes\pokemon\GrassPokemon;
-use classes\pokemon\WaterPokemon;
+use App\pokemon\FirePokemon;
+use App\pokemon\FlyPokemon;
+use App\pokemon\GrassPokemon;
+use App\pokemon\WaterPokemon;
 
 $moveTemplates = [
     "tackle" => ["Tackle", "Normal", 35, 40],
@@ -29,7 +29,7 @@ function createMove($newMove) {
 
 $pokemonTemplates = [
     "charmander" => ["Charmander", FirePokemon::class, 5, 100, ["tackle", "ember"], "charmeleon"],
-    "charmeleon" => ["Charmeleon", FirePokemon::class, 16, 200, ["tackle", "ember", "dragon_breath"],],
+    "charmeleon" => ["Charmeleon", FirePokemon::class, 16, 200, ["tackle", "ember", "dragon_breath"], "charizard"],
     "charizard" => ["Charizard", FirePokemon::class, 36, 300, ["tackle", "ember", "dragon_breath", "flamethrower"]],
     "psyduck" => ["Psyduck", WaterPokemon::class, 15, 100, ["tackle", "bubble"]],
     "pidgey" => ["Pidgey", FlyPokemon::class, 5, 100, ["tackle", "gust"]],
@@ -40,15 +40,14 @@ $pokemonTemplates = [
 
 function createPokemon($name) {
     global $pokemonTemplates;
-
+    
     [$naam, $class, $level, $hp, $moveKeys] = $pokemonTemplates[$name];
+    $evolutionName = $pokemonTemplates[$name][5] ?? null;
 
-    $pokemon = new $class($naam, $level, $hp);
-
+    $pokemon = new $class($naam, $level, $hp, $evolutionName);
     foreach ($moveKeys as $moveKey) {
         $pokemon->addMove(createMove($moveKey));
     }
-
     return $pokemon;
 }
 

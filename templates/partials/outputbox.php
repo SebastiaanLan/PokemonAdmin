@@ -11,5 +11,11 @@
         <li><?= $trainers['gary']->getPokemons()[1]->trade($trainers['red']) ?></li>
         <li><?= $trainers['gary']->getPokemons()[2]->fly() ?></li>
         <li><?= $trainers['red']->getPokemons()[1]->swim() ?></li>
+
+        <li><?= $trainers['red']->getPokemons()[0]->evolve() ?></li>
+        <?php for ($i = 0; $i <= 10; $i++): ?>
+            <li><?= $trainers['red']->getPokemons()[0]->levelUp() ?></li>
+        <?php endfor; ?>
+        <li><?= $trainers['red']->getPokemons()[0]->evolve() ?></li>    
     </ul>
 </div>
